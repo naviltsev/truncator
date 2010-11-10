@@ -85,21 +85,24 @@ __DATA__
 
 @@ index.html.ep
 % layout 'default';
-<% if (my $error = stash 'error') { %>
-    <p class="error"><%= $error %></p>
-<% } %>
-<% if (my $url = stash 'shortened_url') { %>
-    <p class="shortened-url"> Shortened URL is 
-    <b>http://192.168.0.196:3000/<%= $url %></b></p>
-<% } %>
-<form class="link-form" method="POST">
-    <span class="name">
-        <input class="link" type="text" name="href" />
-    </span>
-    <span class="submit">
-        <input type="submit" value="Truncate!" />
-    </span>
-</form>
+<div class="link-div">
+    <% if (my $error = stash 'error') { %>
+        <p class="error"><%= $error %></p>
+    <% } %>
+    <% if (my $url = stash 'shortened_url') { %>
+        <p class="shortened-url"> Shortened URL is 
+        <b>http://192.168.0.196:3000/<%= $url %></b></p>
+    <% } %>
+
+    <form method="POST">
+        <span class="name">
+            <input class="link" type="text" name="href" />
+        </span>
+        <span class="submit">
+            <input type="submit" value="Truncate!" />
+        </span>
+    </form>
+</div>
 
 @@ layouts/default.html.ep
 <style type="text/css">
@@ -136,9 +139,13 @@ __DATA__
         text-align: center;
     }
     
-    form.link-form {
-        margin: auto;
+    div.link-div {
         width: 800px;
+        height: 50px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin: -25px 0 0 -400px;
     }
 </style>
 <!doctype html><html>
