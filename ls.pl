@@ -1,21 +1,14 @@
 #!/usr/bin/env perl
-package d;
-use Data::Dumper;
 
-sub log {
-    my $message = shift;
-    print STDERR "[DEBUG] $message\n";
-    return;
-}
-1;
-
-# =============================
-
-package main;
 use Mojolicious::Lite;
 use MongoDB;
 use MongoDB::OID;
 use Data::Dumper;
+
+my $mode = app->mode || 'development';
+my $config = plugin json_config => {
+    file => "config." . $mode . ".json",
+};
 
 # Prepare CouchDB
 my $mongo_conn = MongoDB::Connection->new;
@@ -91,7 +84,7 @@ __DATA__
     <% } %>
     <% if (my $url = stash 'shortened_url') { %>
         <p class="shortened-url"> Shortened URL is 
-        <b>http://192.168.0.196:3000/<%= $url %></b></p>
+        <b>http://<%= $config->{hostname} %>/<%= $url %></b></p>
     <% } %>
 
     <form method="POST">
