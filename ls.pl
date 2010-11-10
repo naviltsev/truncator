@@ -89,7 +89,7 @@ __DATA__
     <p class="error"><%= $error %></p>
 <% } %>
 <% if (my $url = stash 'shortened_url') { %>
-    <p class="shortened-url" Shortened URL is 
+    <p class="shortened-url"> Shortened URL is 
     <b>http://192.168.0.196:3000/<%= $url %></b></p>
 <% } %>
 <form class="link-form" method="POST">
