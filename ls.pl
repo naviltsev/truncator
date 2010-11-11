@@ -142,96 +142,97 @@ __DATA__
 </div>
 
 @@ layouts/default.html.ep
-<style type="text/css">
-    body {
-        font: normal 13px/100% Verdana, Tahoma, sans-serif;
-    }
-    input {
-        margin: auto;
-        padding: 9px;
-        border: solid 1px #a1a1a1;
-        outline: 0;
-        width: 680px;
-        font: normal 13px/100% Verdana, Tahoma, sans-serif;
-        background: #ffffff
-    }
-    
-    input:hover {
-        border-color: #c9c9c9;
-    }
-    
-    .submit input {
-        margin: auto;
-        width: auto;
-        padding: 9px 15px;
-        background: #617798;
-        border: 0;
-        font-size: 14px;
-        color: #ffffff;
-    }
-    
-    .error {
-        font-weight: bold;
-        color: red;
-        text-align: center;
-    }
-    
-    .shortened-url {
-        text-align: center;
-        color: #617798;
-    }
-    
-    div.link-div {
-        width: 800px;
-        height: 50px;
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        margin: -25px 0 0 -400px;
-    }
-    
-    table.last-added {
-        background: 0;
-        width: 800px;
-        height:300px;
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        margin: -150px 0 0 -450px;
-    }
-    
-    .last-added a {
-        color: #617798;
-        text-decoration: none;
-    }
-    
-    td.header {
-        font-weight: bold;
-        text-align: center;
-        padding: 10px;
-        background: #ccc;
-        color: #617798;
-    }
-        
-    td.odd {
-        background: #eee;
-        vertical-align: top;
-    }
-    
-    td.even {
-        background: #ddd;
-        vertical-align: top;
-    }
-    
-    .links a {
-        color: #617798;
-        text-decoration: none;
-    }
-    
-</style>
-
 <!doctype html>
 <html>
-    <head><title>Truncator!</title></head>
+    <head>
+        <title>Truncator!</title>
+        <link rel="stylesheet" type="text/css" href="/styles.css" />
+    </head>
     <body><%== content %></body>
 </html>
+
+@@ styles.css
+body {
+    font: normal 13px/100% Verdana, Tahoma, sans-serif;
+}
+input {
+    margin: auto;
+    padding: 9px;
+    border: solid 1px #a1a1a1;
+    outline: 0;
+    width: 673px;
+    font: normal 13px/100% Verdana, Tahoma, sans-serif;
+    background: #ffffff
+}
+
+input:hover {
+    border-color: #c9c9c9;
+}
+
+.submit input {
+    margin: auto;
+    width: auto;
+    padding: 9px 15px;
+    background: #617798;
+    border: 0;
+    font-size: 14px;
+    color: #ffffff;
+}
+
+.error {
+    font-weight: bold;
+    color: red;
+    text-align: center;
+}
+
+.shortened-url {
+    text-align: center;
+    color: #617798;
+}
+
+div.link-div {
+    width: 800px;
+    height: 50px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin: -25px 0 0 -400px;
+}
+
+table.last-added {
+    background: 0;
+    width: 800px;
+    height:300px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin: -150px 0 0 -450px;
+}
+
+.last-added a {
+    color: #617798;
+    text-decoration: none;
+}
+
+td.header {
+    font-weight: bold;
+    text-align: center;
+    padding: 10px;
+    background: #ccc;
+    color: #617798;
+}
+    
+td.odd {
+    background: #eee;
+    vertical-align: top;
+}
+
+td.even {
+    background: #ddd;
+    vertical-align: top;
+}
+
+.links a {
+    color: #617798;
+    text-decoration: none;
+}
