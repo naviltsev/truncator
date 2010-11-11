@@ -91,8 +91,7 @@ __DATA__
         <p class="error"><%= $error %></p>
     <% } %>
     <% if (my $url = stash 'shortened_url') { %>
-        <p class="shortened-url"> Shortened URL is 
-        <b>http://<%= $config->{hostname} %>/<%= $url %></b></p>
+        <p class="shortened-url"><b>http://<%= $config->{hostname} %>/<%= $url %></b></p>
     <% } %>
     
     <script type="text/javascript">
@@ -102,13 +101,16 @@ __DATA__
 
 @@ layouts/default.html.ep
 <style type="text/css">
+    body {
+        font: normal 13px/100% Verdana, Tahoma, sans-serif;
+    }
     input {
         margin: auto;
         padding: 9px;
         border: solid 1px #a1a1a1;
         outline: 0;
-        font: normal 13px/100% Verdana, Tahoma, sans-serif;
         width: 680px;
+        font: normal 13px/100% Verdana, Tahoma, sans-serif;
         background: #ffffff
     }
     
@@ -127,12 +129,14 @@ __DATA__
     }
     
     .error {
+        font-weight: bold;
         color: red;
         text-align: center;
     }
     
     .shortened-url {
         text-align: center;
+        color: #617798;
     }
     
     div.link-div {
