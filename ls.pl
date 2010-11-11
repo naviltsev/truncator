@@ -59,7 +59,6 @@ get '/:href' => sub {
     
     return if $href eq 'favicon';
 
-    d::log( $href );
     my $cursor = $mongo_coll->find( { short => $href } );
     if( $cursor->count > 0 ) {
         my $link = $cursor->next;
@@ -78,7 +77,7 @@ __DATA__
 
 @@ index.html.ep
 % layout 'default';
-<div class="link-div">
+
     <% if (my $error = stash 'error') { %>
         <p class="error"><%= $error %></p>
     <% } %>
@@ -86,7 +85,7 @@ __DATA__
         <p class="shortened-url"> Shortened URL is 
         <b>http://<%= $config->{hostname} %>/<%= $url %></b></p>
     <% } %>
-
+<div class="link-div">
     <form method="POST">
         <span class="name">
             <input class="link" type="text" name="href" />
@@ -142,6 +141,6 @@ __DATA__
     }
 </style>
 <!doctype html><html>
-    <head><title>Link Shortener</title></head>
+    <head><title>Truncator!</title></head>
     <body><%== content %></body>
 </html>
