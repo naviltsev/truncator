@@ -22,7 +22,6 @@ sub generate {
 
 # Routes
 get '/' => 'index';
-
 post '/' => sub {
     my $self = shift;
     my $href = $self->param('href');
@@ -45,12 +44,24 @@ post '/' => sub {
         $mongo_coll->insert({
             full => $href,
             short => $short,
+            created_at => time(),
         });
     }
     
     $self->stash( shortened_url => $short );
 } => 'index';
 
+get '/last' => sub {
+    my $self = shift;
+    
+    my $count = $self->param('count');
+    my $cursor = $mongo_coll->query->sort( { created_at => -1 } )->limit( 10 );
+
+    $self->stash( mongo_cursor => $cursor );
+    $self->render();
+    
+    return;
+} => 'last';
 
 get '/:href' => sub {
     my $self = shift;
@@ -70,13 +81,16 @@ get '/:href' => sub {
 
 app->start;
 
-
-
-
 __DATA__
 
 @@ index.html.ep
 % layout 'default';
+<div class="navigation">
+    <span class="links">
+        <a href="<%= url_for 'last' %>">Last 10 truncates</a>
+    </span>
+</div>
+
 <div class="link-div">    
     <form method="POST">
         <span class="name">
@@ -97,6 +111,34 @@ __DATA__
     <script type="text/javascript">
         document.getElementById("href").focus();
     </script>
+</div>
+
+@@ last.html.ep
+% layout 'default';
+<div class="navigation">
+    <span class="links">
+        <a href="<%= url_for '/' %>">Back</a>
+    </span>
+</div>
+
+<div class="last-added">
+    <% my $cursor = stash 'mongo_cursor'; %>
+    <% my $counter = 1; %>
+    <table class="last-added">
+        <tr><td class="header" colspan="2">10 recent truncated URLs</td></tr>
+        <% while( my $current = $cursor->next ) { %>
+            <% my $class = $counter % 2 ? "odd" : "even"; %>
+            <tr>
+                <td class="<%= $class %>">
+                    <a href="<%= $current->{full} %>"><%= $current->{full} %></a>
+                </td>
+                <td class="<%= $class %>">
+                    <a href="http://<%= $config->{hostname} %>/<%= $current->{short} %>">http://<%= $config->{hostname} %>/<%= $current->{short} %></a>
+                </td> 
+            </tr>
+            <% $counter++; %>
+        <% } %>
+    </table>
 </div>
 
 @@ layouts/default.html.ep
@@ -147,8 +189,49 @@ __DATA__
         top: 50%;
         margin: -25px 0 0 -400px;
     }
+    
+    table.last-added {
+        background: 0;
+        width: 800px;
+        height:300px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin: -150px 0 0 -450px;
+    }
+    
+    .last-added a {
+        color: #617798;
+        text-decoration: none;
+    }
+    
+    td.header {
+        font-weight: bold;
+        text-align: center;
+        padding: 10px;
+        background: #ccc;
+        color: #617798;
+    }
+        
+    td.odd {
+        background: #eee;
+        vertical-align: top;
+    }
+    
+    td.even {
+        background: #ddd;
+        vertical-align: top;
+    }
+    
+    .links a {
+        color: #617798;
+        text-decoration: none;
+    }
+    
 </style>
-<!doctype html><html>
+
+<!doctype html>
+<html>
     <head><title>Truncator!</title></head>
     <body><%== content %></body>
 </html>
