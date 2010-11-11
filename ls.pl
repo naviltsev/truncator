@@ -77,15 +77,7 @@ __DATA__
 
 @@ index.html.ep
 % layout 'default';
-
-    <% if (my $error = stash 'error') { %>
-        <p class="error"><%= $error %></p>
-    <% } %>
-    <% if (my $url = stash 'shortened_url') { %>
-        <p class="shortened-url"> Shortened URL is 
-        <b>http://<%= $config->{hostname} %>/<%= $url %></b></p>
-    <% } %>
-<div class="link-div">
+<div class="link-div">    
     <form method="POST">
         <span class="name">
             <input class="link" type="text" name="href" />
@@ -94,6 +86,14 @@ __DATA__
             <input type="submit" value="Truncate!" />
         </span>
     </form>
+    
+    <% if (my $error = stash 'error') { %>
+        <p class="error"><%= $error %></p>
+    <% } %>
+    <% if (my $url = stash 'shortened_url') { %>
+        <p class="shortened-url"> Shortened URL is 
+        <b>http://<%= $config->{hostname} %>/<%= $url %></b></p>
+    <% } %>
 </div>
 
 @@ layouts/default.html.ep
