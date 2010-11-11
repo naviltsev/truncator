@@ -80,10 +80,10 @@ __DATA__
 <div class="link-div">    
     <form method="POST">
         <span class="name">
-            <input class="link" type="text" name="href" />
+            <input class="link" type="text" name="href" id="href" />
         </span>
         <span class="submit">
-            <input type="submit" value="Truncate!" />
+            <input type="submit" value="Truncate!" name="submit" id="submit" />
         </span>
     </form>
     
@@ -94,6 +94,10 @@ __DATA__
         <p class="shortened-url"> Shortened URL is 
         <b>http://<%= $config->{hostname} %>/<%= $url %></b></p>
     <% } %>
+    
+    <script type="text/javascript">
+        document.getElementById("href").focus();
+    </script>
 </div>
 
 @@ layouts/default.html.ep
@@ -101,7 +105,7 @@ __DATA__
     input {
         margin: auto;
         padding: 9px;
-        border: solid 1px #e5e5e5;
+        border: solid 1px #a1a1a1;
         outline: 0;
         font: normal 13px/100% Verdana, Tahoma, sans-serif;
         width: 680px;
