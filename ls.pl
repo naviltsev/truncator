@@ -6,11 +6,11 @@ use MongoDB::OID;
 use Data::Dumper;
 
 my $mode = app->mode || 'development';
-my $config = plugin json_config => {
+my $config = plugin JSONConfig => {
     file => "config." . $mode . ".json",
 };
 
-# Prepare CouchDB
+# Prepare MongoDB
 my $mongo_conn = MongoDB::Connection->new;
 my $mongo_db = $mongo_conn->ls_project;
 my $mongo_coll = $mongo_db->links;
@@ -162,7 +162,8 @@ input {
     outline: 0;
     width: 673px;
     font: normal 13px/100% Verdana, Tahoma, sans-serif;
-    background: #ffffff
+    background: #ffffff;
+    float: left;
 }
 
 input:hover {
