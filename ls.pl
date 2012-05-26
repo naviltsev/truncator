@@ -76,7 +76,7 @@ get '/:href' => sub {
         $full = $link->{full};
     }
     
-    $self->redirect_to( "$full ");
+    $self->redirect_to( "$full");
 };
 
 app->start;
