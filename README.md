@@ -1,0 +1,4 @@
+trunc
+=====
+
+truncator
