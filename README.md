@@ -1,4 +1,4 @@
-trunc
+truncator
 =====
 
-truncator
+URL shortener
